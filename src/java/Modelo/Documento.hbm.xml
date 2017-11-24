@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/11/2017 12:40:12 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class catalog="Mazda" name="Modelo.Documento" optimistic-lock="version" table="Documento">
+    <id name="idDocumento" type="java.lang.Integer">
+      <column name="idDocumento"/>
+      <generator class="identity"/>
+    </id>
+    <many-to-one class="Modelo.Pedido" fetch="select" name="pedido">
+      <column name="Pedido_idPedido" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="Modelo.TipoDocumento" fetch="select" name="tipoDocumento">
+      <column name="TipoDocumento_idTipoDocumento" not-null="true" unique="true"/>
+    </many-to-one>
+    <property name="formato" type="string">
+      <column length="45" name="formato" not-null="true"/>
+    </property>
+  </class>
+</hibernate-mapping>

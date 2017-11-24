@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/11/2017 12:40:12 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class catalog="Mazda" name="Modelo.CarroCompras" optimistic-lock="version" table="CarroCompras">
+    <id name="idCarroCompras" type="java.lang.Integer">
+      <column name="idCarroCompras"/>
+      <generator class="identity"/>
+    </id>
+    <many-to-one class="Modelo.Usuario" fetch="select" name="usuario">
+      <column name="Usuario_idUsuario" not-null="true"/>
+    </many-to-one>
+    <property name="estado" type="string">
+      <column length="45" name="estado" not-null="true"/>
+    </property>
+    <set fetch="select" inverse="true" lazy="true" name="pedidos" table="Pedido">
+      <key>
+        <column name="CarroCompras_idCarroCompras" not-null="true"/>
+      </key>
+      <one-to-many class="Modelo.Pedido"/>
+    </set>
+    <set fetch="select" inverse="false" lazy="true" name="productos" table="CarroCompras_has_Producto">
+      <key>
+        <column name="CarroCompras_idCarroCompras" not-null="true"/>
+      </key>
+      <many-to-many entity-name="s.Producto">
+        <column name="Producto_idProducto" not-null="true"/>
+      </many-to-many>
+    </set>
+  </class>
+</hibernate-mapping>
